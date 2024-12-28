@@ -54,6 +54,16 @@ const validateEditTask = [
     .isBoolean()
     .withMessage("The completed must be a boolean"),
 
+  check("state")
+    .exists({ checkFalsy: true })
+    .withMessage("The state is required and cannot be empty")
+    .isString()
+    .withMessage("The state must be a string")
+    .isIn(["created", "progress", "finished"])
+    .withMessage(
+      "The state must be one of the following values: created, progress, finished"
+    ),
+
   handleValidationErrors,
 ];
 

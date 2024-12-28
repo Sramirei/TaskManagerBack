@@ -130,7 +130,20 @@ const create = async (req, res) => {
 const update = async (req, res) => {
   const { id } = req.params;
   const { title, description, state, completed } = req.body;
+
   try {
+    // Busca la tarea por su ID
+    const task = await taskModel.findById(id);
+
+    // Si la tarea no existe, responde con un error
+    if (!task) {
+      return res.status(404).json({
+        code: 0,
+        message: "Task not found.",
+      });
+    }
+
+    // Actualiza la tarea si existe
     await taskModel.updateOne(
       { _id: id },
       {
@@ -143,11 +156,12 @@ const update = async (req, res) => {
       }
     );
 
+    // Crear historial
     await createHistory(author, `Task Edit: ${title}`, localDateTime);
 
     return res.status(200).json({
       code: 1,
-      message: "task edit successfully",
+      message: "Task edited successfully.",
     });
   } catch (error) {
     console.error("Error editing task:", error);
@@ -161,15 +175,27 @@ const update = async (req, res) => {
 
 const deleted = async (req, res) => {
   const { id } = req.params;
+
   try {
+    const task = await taskModel.findById(id);
+
+    if (!task) {
+      return res.status(404).json({
+        code: 0,
+        message: "Task not found.",
+      });
+    }
+
     await taskModel.findByIdAndRemove(id);
-    await createHistory(author, `Task Deleted: ${title}`, localDateTime);
+
+    await createHistory(author, `Task Deleted: ${task.title}`, localDateTime);
+
     return res.status(200).json({
       code: 1,
-      message: "task deleted successfully",
+      message: "Task deleted successfully.",
     });
   } catch (error) {
-    console.error("Error deleted task:", error);
+    console.error("Error deleting task:", error);
     return res.status(500).json({
       code: -1,
       message: "An error occurred while deleting the task.",
