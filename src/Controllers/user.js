@@ -77,6 +77,7 @@ const login = async (req, res) => {
   });
 
   res.status(200).json({
+    code: 1,
     user: userForToken,
     token,
   });

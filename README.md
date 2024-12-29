@@ -54,24 +54,6 @@ npm start
 
 5. Su API ahora debería estar ejecutándose en `http://localhost:9000`.
 
-## Compatibilidad con Docker
-
-Para ejecutar el proyecto con Docker, siga estos pasos: (ejecute los comandos en la raiz del proyecto)
-
-1. Genere la imagen de Docker:
-
-```bash
-docker build -t task-manager-back .
-```
-
-2. Ejecute el contenedor de Docker:
-
-```bash
-docker run -p 9000:9000 task-manager-back
-```
-
-La aplicación estará disponible en `http://localhost:9000`.
-
 ## API de puntos finales
 
 ### Usuario

@@ -6,7 +6,7 @@ const { create, login } = require("../Controllers/user");
 
 const { validateCreateUser } = require("../Validators/user");
 
-router.post("/create", userExtrator, validateCreateUser, create);
+router.post("/create", validateCreateUser, create);
 router.post("/login", login);
 
 module.exports = router;

@@ -128,6 +128,9 @@ const create = async (req, res) => {
 };
 
 const update = async (req, res) => {
+  const localDateTime = moment()
+    .tz("America/Bogota")
+    .format("YYYY-MM-DD HH:mm:ss");
   const { id } = req.params;
   const { title, description, state, completed } = req.body;
 
@@ -157,7 +160,7 @@ const update = async (req, res) => {
     );
 
     // Crear historial
-    await createHistory(author, `Task Edit: ${title}`, localDateTime);
+    await createHistory(task.author, `Task Edit: ${title}`, localDateTime);
 
     return res.status(200).json({
       code: 1,
@@ -175,6 +178,9 @@ const update = async (req, res) => {
 
 const deleted = async (req, res) => {
   const { id } = req.params;
+  const localDateTime = moment()
+    .tz("America/Bogota")
+    .format("YYYY-MM-DD HH:mm:ss");
 
   try {
     const task = await taskModel.findById(id);
@@ -188,7 +194,11 @@ const deleted = async (req, res) => {
 
     await taskModel.findByIdAndRemove(id);
 
-    await createHistory(author, `Task Deleted: ${task.title}`, localDateTime);
+    await createHistory(
+      task.author,
+      `Task Deleted: ${task.title}`,
+      localDateTime
+    );
 
     return res.status(200).json({
       code: 1,

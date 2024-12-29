@@ -16,7 +16,7 @@ router.get("/", userExtrator, getTasks);
 router.get("/:id", userExtrator, getTask); //get by task id
 router.get("/forUser/:id", userExtrator, getTaskForUser); //get by user id
 router.post("/create", userExtrator, validateCreateTask, create);
-router.put("/edit/:id", userExtrator, validateEditTask, update);
+router.put("/edit/:id", userExtrator, update);
 router.delete("/deleted/:id", userExtrator, deleted);
 
 module.exports = router;
