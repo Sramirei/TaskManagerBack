@@ -53,9 +53,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{local}}/api/v1/user/login",
+							"raw": "{{prod}}/api/v1/user/login",
 							"host": [
-								"{{local}}"
+								"{{prod}}"
 							],
 							"path": [
 								"api",
@@ -343,7 +343,7 @@
 		},
 		{
 			"key": "prod",
-			"value": "http://localhost:9000/",
+			"value": "https://taskmanagerback-7way.onrender.com",
 			"type": "string"
 		}
 	]
