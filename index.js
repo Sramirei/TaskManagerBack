@@ -15,7 +15,11 @@ const swaggerSpec = swaggerJsdoc(options);
 const app = express();
 const PORT = process.env.PORT || 3050;
 const corsOptions = {
-  origin: ["*"], // Lista de IPs permitidas
+  origin: [
+    "*",
+    "https://task-manager-front-one.vercel.app",
+    "http://localhost:3000",
+  ], // Lista de IPs permitidas
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
