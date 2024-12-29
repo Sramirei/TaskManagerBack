@@ -10,7 +10,6 @@ Antes de comenzar, asegúrese de cumplir con los siguientes requisitos:
 
 - Node.js v21.4.0
 - MongoDB (Cloud MongoDB Atlas o instancia local)
-- Docker (opcional)
 
 ## Instalación
 

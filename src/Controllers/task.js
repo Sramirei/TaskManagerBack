@@ -159,8 +159,20 @@ const update = async (req, res) => {
       }
     );
 
+    let historyMessage = `Task Edit: ${title || task.title}`;
+
+    if (state && state !== task.state) {
+      const stateChange =
+        state === "progress"
+          ? "en proceso"
+          : state === "finished"
+          ? "terminado"
+          : state;
+      historyMessage = `Estado cambiado a: ${stateChange} de la tarjeta ${task.title}`;
+    }
+
     // Crear historial
-    await createHistory(task.author, `Task Edit: ${title}`, localDateTime);
+    await createHistory(task.author, historyMessage, localDateTime);
 
     return res.status(200).json({
       code: 1,
